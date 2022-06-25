@@ -17,9 +17,10 @@ model Estudiante {
   edad                Int
   pais_origen         String
   carrera             String
-  materias_cursadas   String[]
   es_moroso           Boolean
   deuda_ciclo_actual  Int
+  // materias            materias[]
+  // facultad            facultad[]
 }
 
 model Materia {
@@ -30,4 +31,22 @@ model Materia {
   iniciales_profesor  String
   creditos            Int
   carrera             String
+}
+
+model Facultad {
+  id                  Int @id @default(autoincrement())
+  nombre              String
+  nombre_decano       String
+  abreviacion         String
+  // materias            Materia[]
+  // estudiantes         Estudiante[]
+  // profesores          Profesor[]
+}
+
+model Profesor {
+  id                  Int @id @default(autoincrement())
+  nombre              String
+  apellido            String
+  // materias            Materia[]
+  // facultad            Facultad
 }
