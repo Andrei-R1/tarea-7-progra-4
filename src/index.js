@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client";
 
 import estudiantesRoutes from "./routes/estudiantes.routes.js";
 import materiasRoutes from "./routes/materias.routes.js";
+import profesoresRoutes from "./routes/profesores.routes.js";
+import facultadesRoutes from "./routes/facultades.routes.js";
 import morgan from "morgan";
 
 const app = express();
@@ -12,6 +14,8 @@ const prisma = new PrismaClient();
 app.use(express.json());
 app.use(estudiantesRoutes);
 app.use(materiasRoutes);
+app.use(profesoresRoutes);
+app.use(facultadesRoutes);
 
 app.listen(8002, () => {
   console.log(`🚀 Example app listening on port 8002`);
