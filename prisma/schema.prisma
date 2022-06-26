@@ -12,25 +12,29 @@ datasource db {
 
 model Estudiante {
   id                  Int @id @default(autoincrement())
-  primer_nombre       String
-  primer_apellido     String
+  nombre              String
+  apellido            String
   edad                Int
-  pais_origen         String
+  pais                String
   carrera             String
   es_moroso           Boolean
   deuda_ciclo_actual  Int
-  // materias            materias[]
-  // facultad            facultad[]
+  materias            Materia[]  @relation(references: [id])
+  facultad            Facultad @relation(fields: [facultad_id], references: [id])
+  facultad_id         Int
 }
 
 model Materia {
   id                  Int @id @default(autoincrement())
   nombre              String
   codigo              Int
-  profesor            String
-  iniciales_profesor  String
   creditos            Int
   carrera             String
+  estudiantes         Estudiante[] @relation(references: [id])
+  profesor            Profesor @relation(fields: [profesor_id], references: [id])
+  profesor_id         Int
+  facultad            Facultad @relation(fields: [facultad_id], references: [id])
+  facultad_id         Int
 }
 
 model Facultad {
@@ -38,15 +42,16 @@ model Facultad {
   nombre              String
   nombre_decano       String
   abreviacion         String
-  // materias            Materia[]
-  // estudiantes         Estudiante[]
-  // profesores          Profesor[]
+  materias            Materia[]
+  estudiantes         Estudiante[]
+  profesores          Profesor[]
 }
 
 model Profesor {
   id                  Int @id @default(autoincrement())
   nombre              String
   apellido            String
-  // materias            Materia[]
-  // facultad            Facultad
+  materias            Materia[]
+  facultad            Facultad @relation(fields: [facultad_id], references: [id])
+  facultad_id         Int
 }
