@@ -1,64 +1,92 @@
-import {Router} from 'express';
+import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
 
 const router = Router();
 const prisma = new PrismaClient();
 
-// Get y Post para estudiantes
+// Get y Post para profesor
 
-router.get("/estudiante", async (req, res) => {
-  const estudiante = await prisma.estudiante.findMany();
-  res.json(estudiante);
+router.get("/profesor", async (req, res) => {
+  const profesor = await prisma.profesor.findMany();
+  res.json(profesor);
 });
 
-router.post("/estudiante", async (req, res) => {
-  const result = await prisma.estudiante.create({
+router.post("/profesor", async (req, res) => {
+  const result = await prisma.profesor.create({
     // req.body es la info que manda el usuario para crear
     data: req.body,
   });
   res.json(result);
 });
 
-// Get, Put y Delete por id para estudiantes
+// Get, Put y Delete por id para profesor
 
-router.get("/estudiante/:id", async (req, res) => {
+router.get("/profesor/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const getEstudiante = await prisma.estudiante.findUnique({
+    const getProfesor = await prisma.profesor.findUnique({
       where: { id: Number(id) },
     });
-    if (getEstudiante) {
-      res.json(getEstudiante);
+    if (getProfesor) {
+      res.json(getProfesor);
     } else {
-      res.json({ error: `No existe ningun estudiante con la id ${id}` });
+      res.json({ error: `No existe ningun profesor con la id ${id}` });
     }
   } catch (e) {
-    res.json({ error: `Estudiante con el id ${id} no existe` });
+    res.json({ error: `Profesor con el id ${id} no existe` });
   }
 });
 
-router.put("/estudiante/:id", async (req, res) => {
+router.put("/profesor/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const updateEstudiante = await prisma.estudiante.update({
+    const updateProfesor = await prisma.profesor.update({
       where: { id: Number(id) },
       // req.body es la info que manda el usuario para actualizar
       data: req.body,
     });
-    res.json(updateEstudiante);
+    res.json(updateProfesor);
   } catch (e) {
-    res.json({ error: `Estudiante con el id ${id} no existe` });
+    res.json({ error: `El profesor con el id ${id} no existe` });
   }
 });
 
-router.delete(`/estudiante/:id`, async (req, res) => {
+router.delete(`/profesor/:id`, async (req, res) => {
   const { id } = req.params;
-  const estudiante = await prisma.estudiante.delete({
+  const profesor = await prisma.profesor.delete({
     where: {
       id: Number(id),
     },
   });
-  res.json(estudiante);
+  res.json(profesor);
+});
+
+// Get materias de un profesor
+
+router.get("/profesor/:id/materias", async (req, res) => {
+  const { id } = req.params;
+  // const id = req.params.id
+  const materias = await prisma.materia.findMany({
+    where: {
+      materia_id: Number(id),
+    },
+  });
+
+  res.json(materias);
+});
+
+// Get estudiantes de un profesor
+
+router.get("/profesor/:id/estudiantes", async (req, res) => {
+  const { id } = req.params;
+  // const id = req.params.id
+  const estudiantes = await prisma.estudiante.findMany({
+    where: {
+      estudiante_id: Number(id),
+    },
+  });
+
+  res.json(estudiantes);
 });
 
 export default router;

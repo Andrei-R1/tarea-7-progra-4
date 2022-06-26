@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
 
 const router = Router();
@@ -51,7 +51,7 @@ router.put("/facultad/:id", async (req, res) => {
   }
 });
 
-router.delete(`/facultad/:id`, async (req, res) => {
+router.delete("/facultad/:id", async (req, res) => {
   const { id } = req.params;
   const facultad = await prisma.facultad.delete({
     where: {
@@ -59,6 +59,51 @@ router.delete(`/facultad/:id`, async (req, res) => {
     },
   });
   res.json(facultad);
+});
+
+// Get estudiantes de una facultad
+
+router.get("/facultad/:id/estudiantes", async (req, res) => {
+  const { id } = req.params;
+  // const id = req.params.id
+
+  const estudiantes = await prisma.estudiante.findMany({
+    where: {
+      estudiante_id: Number(id),
+    },
+  });
+
+  res.json(estudiantes);
+});
+
+// Get profesores de una facultad
+
+router.get("/facultad/:id/profesores", async (req, res) => {
+  const { id } = req.params;
+  // const id = req.params.id
+
+  const profesores = await prisma.profesor.findMany({
+    where: {
+      profesor_id: Number(id),
+    },
+  });
+
+  res.json(profesores);
+});
+
+// Get materias de una facultad
+
+router.get("/facultad/:id/materias", async (req, res) => {
+  const { id } = req.params;
+  // const id = req.params.id
+
+  const materias = await prisma.materia.findMany({
+    where: {
+      materia_id: Number(id),
+    },
+  });
+
+  res.json(materias);
 });
 
 export default router;

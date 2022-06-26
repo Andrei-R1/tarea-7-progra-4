@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
 
 const router = Router();
@@ -59,6 +59,34 @@ router.delete(`/estudiante/:id`, async (req, res) => {
     },
   });
   res.json(estudiante);
+});
+
+// Get materias de un estudiante
+
+router.get("/estudiante/:id/materias", async (req, res) => {
+  const { id } = req.params;
+  // const id = req.params.id
+  const materias = await prisma.materia.findMany({
+    where: {
+      materia_id: Number(id),
+    },
+  });
+
+  res.json(materias);
+});
+
+// Get profesores de un estudiante
+
+router.get("/estudiante/:id/profesores", async (req, res) => {
+  const { id } = req.params;
+  // const id = req.params.id
+  const profesores = await prisma.profesor.findMany({
+    where: {
+      profesor_id: Number(id),
+    },
+  });
+
+  res.json(profesores);
 });
 
 export default router;

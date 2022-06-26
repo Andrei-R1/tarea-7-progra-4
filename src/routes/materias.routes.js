@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
 
 const router = Router();
@@ -59,6 +59,20 @@ router.delete(`/materia/:id`, async (req, res) => {
     },
   });
   res.json(materia);
+});
+
+// Get estudiantes de una materia
+
+router.get("/materia/:id/estudiantes", async (req, res) => {
+  const { id } = req.params;
+  // const { id } = req.params;
+  const estudiantes = await prisma.estudiante.findUnique({
+    where: {
+      estudiante_id: Number(id),
+    },
+  });
+
+  res.json(estudiantes);
 });
 
 export default router;
