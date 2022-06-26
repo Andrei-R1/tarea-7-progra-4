@@ -68,7 +68,7 @@ router.get("/materia/:id/estudiantes", async (req, res) => {
   // const { id } = req.params;
   const estudiantes = await prisma.estudiante.findUnique({
     where: {
-      estudiante_id: Number(id),
+      materia_id: Number(id),
     },
   });
 

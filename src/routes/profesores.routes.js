@@ -68,7 +68,7 @@ router.get("/profesor/:id/materias", async (req, res) => {
   // const id = req.params.id
   const materias = await prisma.materia.findMany({
     where: {
-      materia_id: Number(id),
+      profesor_id: Number(id),
     },
   });
 

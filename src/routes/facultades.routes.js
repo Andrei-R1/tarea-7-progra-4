@@ -69,7 +69,7 @@ router.get("/facultad/:id/estudiantes", async (req, res) => {
 
   const estudiantes = await prisma.estudiante.findMany({
     where: {
-      estudiante_id: Number(id),
+      facultad_id: Number(id),
     },
   });
 
@@ -84,7 +84,7 @@ router.get("/facultad/:id/profesores", async (req, res) => {
 
   const profesores = await prisma.profesor.findMany({
     where: {
-      profesor_id: Number(id),
+      facultad_id: Number(id),
     },
   });
 
@@ -99,7 +99,7 @@ router.get("/facultad/:id/materias", async (req, res) => {
 
   const materias = await prisma.materia.findMany({
     where: {
-      materia_id: Number(id),
+      facultad_id: Number(id),
     },
   });
 
