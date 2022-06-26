@@ -75,18 +75,4 @@ router.get("/profesor/:id/materias", async (req, res) => {
   res.json(materias);
 });
 
-// Get estudiantes de un profesor
-
-router.get("/profesor/:id/estudiantes", async (req, res) => {
-  const { id } = req.params;
-  // const id = req.params.id
-  const estudiantes = await prisma.estudiante.findMany({
-    where: {
-      estudiante_id: Number(id),
-    },
-  });
-
-  res.json(estudiantes);
-});
-
 export default router;

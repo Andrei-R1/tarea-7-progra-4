@@ -20,7 +20,6 @@ model Estudiante {
   es_moroso           Boolean
   deuda_ciclo_actual  Int
   materias            Materia[]  @relation(references: [id])
-  profesores          Profesor[] @relation(references: [id])
   facultad            Facultad @relation(fields: [facultad_id], references: [id])
   facultad_id         Int
 }
@@ -53,7 +52,6 @@ model Profesor {
   nombre              String
   apellido            String
   materias            Materia[]
-  estudiantes         Estudiante[] @relation(references: [id])
   facultad            Facultad @relation(fields: [facultad_id], references: [id])
   facultad_id         Int
 }
