@@ -19,7 +19,7 @@ model Estudiante {
   carrera             String
   es_moroso           Boolean
   deuda_ciclo_actual  Int
-  // materias            materias[] many to many
+  materias            Materia[]  @relation(references: [id])
   facultad            Facultad @relation(fields: [facultad_id], references: [id])
   facultad_id         Int
 }
@@ -30,7 +30,7 @@ model Materia {
   codigo              Int
   creditos            Int
   carrera             String
-  // estudiantes         estudiantes[] many to many
+  estudiantes         Estudiante[] @relation(references: [id])
   profesor            Profesor @relation(fields: [profesor_id], references: [id])
   profesor_id         Int
   facultad            Facultad @relation(fields: [facultad_id], references: [id])
