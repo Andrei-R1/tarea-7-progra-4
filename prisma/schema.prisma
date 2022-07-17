@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgres://kjbvgiungeshoa:6ff683501cff6df593b09ee26420c1d7b5a39b48ded3f469b0db7f6138abe91e@ec2-3-229-161-70.compute-1.amazonaws.com:5432/damac43t7v1guv"
 }
 
 model Estudiante {
