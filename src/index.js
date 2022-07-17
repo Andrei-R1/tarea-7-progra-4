@@ -19,7 +19,7 @@ app.use(profesoresRoutes);
 app.use(facultadesRoutes);
 app.use(matriculasRoutes);
 
-app.listen(8002, () => {
+app.listen(process.env.PORT || 8002, () => {
   console.log(`🚀 Example app listening on port 8002`);
 });
 
