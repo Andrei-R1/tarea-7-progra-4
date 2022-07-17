@@ -19,7 +19,7 @@ model Estudiante {
   carrera             String
   es_moroso           Boolean
   deuda_ciclo_actual  Int
-  materias            Materia[]  @relation(references: [id])
+  materias            Matricula[]
   facultad            Facultad @relation(fields: [facultad_id], references: [id])
   facultad_id         Int
 }
@@ -30,11 +30,19 @@ model Materia {
   codigo              Int
   creditos            Int
   carrera             String
-  estudiantes         Estudiante[] @relation(references: [id])
+  estudiantes         Matricula[]
   profesor            Profesor @relation(fields: [profesor_id], references: [id])
   profesor_id         Int
   facultad            Facultad @relation(fields: [facultad_id], references: [id])
   facultad_id         Int
+}
+
+model Matricula {
+  id                  Int @id @default(autoincrement())
+  estudiante          Estudiante @relation(fields: [estudiante_id], references: [id])
+  estudiante_id       Int
+  materia             Materia @relation(fields: [materia_id], references: [id])
+  materia_id          Int
 }
 
 model Facultad {
