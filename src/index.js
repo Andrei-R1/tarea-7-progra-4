@@ -7,11 +7,13 @@ import profesoresRoutes from "./routes/profesores.routes.js";
 import facultadesRoutes from "./routes/facultades.routes.js";
 import matriculasRoutes from "./routes/matriculas.routes.js";
 import morgan from "morgan";
+import cors from "cors";
 
 const app = express();
 app.use(morgan("dev"));
 const prisma = new PrismaClient();
 
+app.use(cors());
 app.use(express.json());
 app.use(estudiantesRoutes);
 app.use(materiasRoutes);
